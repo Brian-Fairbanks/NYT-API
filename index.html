@@ -5,34 +5,32 @@
     <meta charset="UTF-8">
     <title>NYT Article Search</title>
 
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+  <script src="https://use.fontawesome.com/9c086fd07c.js"></script>
+ 
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
-    <script src="https://use.fontawesome.com/9c086fd07c.js"></script>
-
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="./style.css">
 </head>
 
 <body>
     <div class="container">
         <div class="row">
 
-            <div class="jumbotron text-center">
-                <h1><i class="fa fa-newspaper-o" aria-hidden="true"></i> NYT Article Search</h1>
-            </div>
-        </div>
+      <div class="col-12 jumbotron text-center bg-primary text-light">
+        <h1><i class="fa fa-newspaper-o" aria-hidden="true"></i> NYT Article Search</h1>
+      </div>
+    </div>
 
-        <div class="row">
-            <div class="col-xs-12 col-sm-12 col-md-3">
-                <div class="panel panel-default">
-                    <div class="panel-heading"><i class="fa fa-newspaper-o" aria-hidden="true"></i> Enter Your Search
-                        Here</div>
-                    <div class="panel-body">
-                        <form>
-                            <div class="form-group">
-                                <label for="searchTerm">Search Term:</label>
-                                <input type="text" class="form-control" id="searchTerm" placeholder="Search Term">
-                            </div>
+    <div class="row">
+    <div class="col-12">
+      <div class="panel panel-default ">
+        <div class="panel-heading bg-primary text-light"><i class="fa fa-newspaper-o" aria-hidden="true"></i> Enter Your Search Here</div>
+          <div class="panel-body">
+            <form>
+              <div class="form-group">
+                <label for="searchTerm">Search Term:</label>
+                <input type="text" class="form-control" id="searchTerm" placeholder="Search Term">
+              </div>
 
                             <div class="form-group">
                                 <label for="numRecords">Number of Records to Retrieve:</label>
@@ -50,23 +48,17 @@
                             </div>
 
 
-                            <button type="submit" class="btn btn-default submit">Submit</button>
-                            <button type="reset" class="btn btn-default reset">Clear Form</button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-xs-12 col-sm-12 col-md-9">
-                <div class="panel panel-default">
-                    <div class="panel-heading"><i class="fa fa-newspaper-o" aria-hidden="true"></i> Search Results</div>
-                    <div class="panel-body" id="searchResults">
-
-                    </div>
-                </div>
-            </div>
-        </div>
+    <div class="col-12">
+      <div class="panel panel-default">
+        <div class="panel-heading bg-primary text-light"><i class="fa fa-newspaper-o" aria-hidden="true"></i> Top Results</div>
+          <div class="panel-body" id="searchResults">
+           
+          </div>
+      </div>
+      </div>
     </div>
+  </div>
+  <script type="text/javascript" src="./logic.js"></script>
 </body>
 
 </html>
