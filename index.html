@@ -8,8 +8,9 @@
   <script src="https://use.fontawesome.com/9c086fd07c.js"></script>
  
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" href="./styles.css">
 
-  <link rel="stylesheet" type="text/css" href="./style.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 </head>
 
 <body>
@@ -23,42 +24,42 @@
 
     <div class="row">
     <div class="col-12">
-      <div class="panel panel-default ">
-        <div class="panel-heading bg-primary text-light"><i class="fa fa-newspaper-o" aria-hidden="true"></i> Enter Your Search Here</div>
-          <div class="panel-body">
+      <div class="card card-default ">
+        <div class="card-heading bg-primary text-light"><i class="fa fa-newspaper-o" aria-hidden="true"></i> Enter Your Search Here</div>
+          <div class="card-body">
             <form>
               <div class="form-group">
                 <label for="searchTerm">Search Term:</label>
                 <input type="text" class="form-control" id="searchTerm" placeholder="Search Term">
               </div>
 
-                            <div class="form-group">
-                                <label for="numRecords">Number of Records to Retrieve:</label>
-                                <input type="number" class="form-control" id="numRecords" placeholder="5">
-                            </div>
+              <div class="form-group">
+                  <label for="numRecords">Number of Records to Retrieve:</label>
+                  <input type="number" class="form-control" id="numRecords" placeholder="5">
+              </div>
 
-                            <div class="form-group">
-                                <label for="startDate">Start Year (optional):</label>
-                                <input type="text" class="form-control" id="startDate">
-                            </div>
+              <div class="form-group">
+                  <label for="startDate">Start Year (optional):</label>
+                  <input type="text" class="form-control" id="startDate">
+              </div>
 
-                            <div class="form-group">
-                                <label for="endDate">End Year (optional):</label>
-                                <input type="text" class="form-control" id="endDate">
-                            </div>
-
-
-   <div class="row"> 
-     <div class="col-12">
-      <div class="panel panel-default">
-        <div class="panel-heading bg-primary text-light"><i class="fa fa-newspaper-o" aria-hidden="true"></i> Top Results</div>
-          <div class="panel-body" id="searchResults">
-           
+              <div class="form-group">
+                  <label for="endDate">End Year (optional):</label>
+                  <input type="text" class="form-control" id="endDate">
+              </div>
+              <button id="runSearch" class="btn btn-primary"> Run Search</button>
+            </form>
+          </div>
+        </div>
+      <div class="row mt-2">
+        <div class="col-12">
+          <div class="card card-default">
+            <div class="card-heading bg-primary text-light"><i class="fa fa-newspaper-o" aria-hidden="true"></i> Top Results</div>
+              <div class="card-body" id="searchResults">
+              </div>
           </div>
         </div>
       </div>
-    </div>
-  </div>
   <script type="text/javascript" src="./logic.js"></script>
 </body>
 

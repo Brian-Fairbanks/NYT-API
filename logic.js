@@ -1,3 +1,12 @@
+//
+//id searchTerm
+//id numRecords
+var startDate = document.getElementById("startDate");
+var endDate = document.getElementById("endDate");
+var runSearch = document.getElementById("runSearch");
+var searchResults = document.getElementById("searchResults");
+
+
 var authKey = "asylPdckpAcAYu6xj2PTfCgG2Boqaeko";
 
 var queryTerm 	= "";
@@ -18,58 +27,39 @@ function runQuery(numArticles, queryURL){
 
 	// The AJAX function uses the URL and Gets the JSON data associated with it. The data then gets stored in the variable called: "NYTData"
 	$.ajax({url: queryURL, method: "GET"}) 
-		.done(function(NYTData) {
+		.then(function(NYTData) {
+      //log the result to console to prove we are getting it.
+      //console.log(JSON.stringify(NYTData));
 
-			// Here we are logging the URL so we have access to it for troubleshooting
-			console.log("------------------------------------")
-			console.log("URL: " + queryURL);
-			console.log("------------------------------------")
-
-			// Here we then log the NYTData to console, where it will show up as an object.
-			console.log(NYTData);
-			console.log("------------------------------------")
+      // Here we are logging the URL so we have access to it for troubleshooting
+      console.log(NYTData);
 
 			// Loop through and provide the correct number of articles
 			for (var i=0; i<numArticles; i++) {
+        // Add to the Article Counter (to make sure we show the right number)
+        articleCounter++;
+        var headlineData = NYTData.response.docs[i].headline.main;
+        var pubDateData = NYTData.response.docs[i].pub_date;
+        var byData = NYTData.response.docs[i].byline.original;
+        var urlData = NYTData.response.docs[i].web_url;
 
-					// Add to the Article Counter (to make sure we show the right number)
-					articleCounter++;
+        console.log(headlineData);
+        console.log(pubDateData);
+        console.log(byData);
+        console.log(urlData);
 
-					// Create the HTML Well (Section) and Add the Article content for each
-					var wellSection = $("<div>");
-					wellSection.addClass('well');
-					wellSection.attr('id', 'articleWell-' + articleCounter)
-					$('#wellSection').append(wellSection);
 
-					// Confirm that the specific JSON for the article isn't missing any details
-					// If the article has a headline include the headline in the HTML
-					if(NYTData.response.docs[i].headline != "null")
-					{
-						$("#articleWell-"+ articleCounter).append('<h3><span class="label label-primary">' + articleCounter + '</span><strong>   ' + NYTData.response.docs[i].headline.main + "</strong></h3>");
-						
-						// Log the first article's Headline to console.
-						console.log(NYTData.response.docs[i].headline.main);
-					}
-					
-					// If the article has a Byline include the headline in the HTML
-					if( NYTData.response.docs[i].byline && NYTData.response.docs[i].byline.hasOwnProperty("original"))
-					{
-						$("#articleWell-"+ articleCounter).append('<h5>' + NYTData.response.docs[i].byline.original + "</h5>");
 
-						// Log the first article's Author to console.
-						console.log(NYTData.response.docs[i].byline.original);
-					}
+        var curArticle = $("<div>");
+        curArticle.addClass("card");
 
-					// Then display the remaining fields in the HTML (Section Name, Date, URL)
-					$("#articleWell-"+ articleCounter).append('<h5>Section: ' + NYTData.response.docs[i].section_name + "</h5>");
-					$("#articleWell-"+ articleCounter).append('<h5>' + NYTData.response.docs[i].pub_date + "</h5>");
-					$("#articleWell-"+ articleCounter).append("<a href='" + NYTData.response.docs[i].web_url + "'>" + NYTData.response.docs[i].web_url + "</a>");
+        //curArticle.append( $("<h2>"+headline+"</h2>"));
+        curArticle.append( $('<span class="float-left bg-primary text-light">'+articleCounter+"<span>"));
+        curArticle.append( $("<h2>"+headlineData+"<h2>"));
+        curArticle.append( $("<span>"+byData+"<span>"));
 
-					// Log the remaining fields to console as well
-					console.log(NYTData.response.docs[i].pub_date);
-					console.log(NYTData.response.docs[i].section_name);
-					console.log(NYTData.response.docs[i].web_url);	
-			}
+        $("#searchResults").append(curArticle); 
+      }
 		});
 
 }
@@ -78,26 +68,28 @@ function runQuery(numArticles, queryURL){
 // ==========================================================
 	
 	// On Click button associated with the Search Button
-	$('#runSearch').on('click', function(){
-
+	$('#runSearch').on('click', function(event){
+    event.preventDefault();
 		// Initially sets the articleCounter to 0
 		articleCounter = 0;
 
 		// Empties the region associated with the articles
-		$("#wellSection").empty();
+		$("#searchResults").empty();
 
 		// Search Term
 		var searchTerm = $('#searchTerm').val().trim();
 		queryURL = queryURLBase + searchTerm;
 
 		// Num Results
-		numResults = $("#numRecordsSelect").val();
+		numResults = $("#numRecords").val();
 
 		// Start Year
-		startYear = $('#startYear').val().trim();
+    startYear = $('#startYear').val()
+    if(startYear!=undefined){startYear.trim()};
 
 		// End Year
-		endYear = $('#endYear').val().trim();
+    endYear = $('#endYear').val();
+    if(endYear!=undefined){startYear.trim()};
 
 		// If the user provides a startYear -- the startYear will be included in the queryURL
 		if (parseInt(startYear)) {
@@ -109,6 +101,7 @@ function runQuery(numArticles, queryURL){
 			queryURL = queryURL + "&end_date=" + endYear + "0101";
 		}
 
+    console.log(numResults +" | "+ queryURL);
 		// Then we will pass the final queryURL and the number of results to include to the runQuery function
 		runQuery(numResults, queryURL);
 
@@ -116,8 +109,10 @@ function runQuery(numArticles, queryURL){
 		return false;
 	});	
 
+
+
 // This button clears the top articles section
 $('#clearAll').on('click', function(){
 	articleCounter = 0;
-	$("#wellSection").empty();
+	searchResults.empty();
 })
